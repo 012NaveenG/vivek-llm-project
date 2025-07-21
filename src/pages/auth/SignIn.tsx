@@ -24,7 +24,8 @@ import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { toast } from "sonner"
-import axios from "axios"
+import BtnLoader from "@/components/BtnLoader.tsx"
+// import axios from "axios"
 
 const Auth = () => {
 
@@ -116,7 +117,7 @@ const Auth = () => {
                                     )}
                                 />
                                 <div className="space-y-4">
-                                  
+
                                     <div className="text-right">
                                         <Link
                                             to="#"
@@ -126,12 +127,12 @@ const Auth = () => {
                                         </Link>
                                     </div>
 
-                                  
+
                                     <Button type="submit" className="w-full">
-                                        Login
+                                        {loading ? <BtnLoader /> : "Login"}
                                     </Button>
 
-                             
+
                                     <p className="text-center text-sm text-muted-foreground">
                                         Don't have an account?{" "}
                                         <Link

@@ -24,7 +24,9 @@ import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { toast } from "sonner"
-import axios from "axios"
+// import axios from "axios"
+import BtnLoader from "@/components/BtnLoader.tsx"
+
 
 const Signup = () => {
     const [loading, setLoading] = useState(false)
@@ -134,7 +136,7 @@ const Signup = () => {
                                 <div className="space-y-4">
 
                                     <Button type="submit" className="w-full">
-                                        Sign Up
+                                        {loading ? <BtnLoader /> : "Sign Up"}
                                     </Button>
 
 
