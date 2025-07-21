@@ -1,13 +1,6 @@
 
-
 import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 
 import {
@@ -25,7 +18,6 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import { toast } from "sonner"
 import BtnLoader from "@/components/BtnLoader.tsx"
-// import axios from "axios"
 
 const Auth = () => {
 
@@ -64,93 +56,102 @@ const Auth = () => {
     }
 
 
-
-
     return (
-        <div className="sm:h-screen w-screen flex items-center justify-center p-5 sm:p-0">
-            <Card className="w-full max-w-2xl">
-                <CardContent className="flex flex-col md:flex-row items-center justify-center gap-8 py-8">
-                    {/* Image Section */}
-                    <div className="flex-shrink-0">
-                        <img
-                            src="https://static.vecteezy.com/system/resources/previews/023/841/777/non_2x/charming-crimson-bots-small-cute-robots-generated-by-ai-free-png.png"
-                            alt="Bot"
-                            className="h-36 sm:h-68 w-42 sm:w-68 object-contain"
-                        />
-                    </div>
-
-                    {/* Form Section */}
-                    <div className="flex-1 w-full max-w-sm">
-                        <CardHeader className="p-0 pb-4">
-                            <CardTitle>Login to your account</CardTitle>
-                            <CardDescription>
-                                Enter your credentials below to login to your account
-                            </CardDescription>
-                        </CardHeader>
-
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-                                <FormField
-                                    control={form.control}
-                                    name="username"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Username</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Enter your username" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
+        <div className=" flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+            <div className="w-full max-w-sm md:max-w-3xl">
+                <div className="flex flex-col gap-6">
+                    <Card className="overflow-hidden p-0">
+                        <CardContent className="grid p-0 md:grid-cols-2">
+                            <div className=" relative hidden md:block">
+                                <img
+                                    src="https://static.vecteezy.com/system/resources/previews/023/841/777/non_2x/charming-crimson-bots-small-cute-robots-generated-by-ai-free-png.png"
+                                    alt="Image"
+                                    className="absolute inset-0 h-full w-full object-cover "
                                 />
-                                <FormField
-                                    control={form.control}
-                                    name="password"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Password</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="your password" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <div className="space-y-4">
+                            </div>
+                            <form onSubmit={form.handleSubmit(handleSubmit)} className="p-6 md:p-8">
+                                <Form {...form}>
+                                    <div className="flex flex-col gap-6">
+                                        <div className="flex flex-col items-center text-center">
+                                            <h1 className="text-2xl font-bold">Welcome back</h1>
+                                            <p className="text-muted-foreground text-balance">
+                                                Login to your  account
+                                            </p>
+                                        </div>
 
-                                    <div className="text-right">
-                                        <Link
-                                            to="#"
-                                            className="text-sm font-medium text-blue-600 hover:underline"
-                                        >
-                                            Forgot Password?
-                                        </Link>
+                                        <FormField
+                                            control={form.control}
+                                            name="username"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Username</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="Enter your username" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="password"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Password</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="your password" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <div className="space-y-4">
+
+                                            <div className="text-right">
+                                                <Link
+                                                    to="/sign-up"
+                                                    className="underline underline-offset-4"
+                                                >
+                                                    Forgot Password?
+                                                </Link>
+                                            </div>
+
+
+                                            <Button type="submit" className="w-full">
+                                                {loading ? <BtnLoader /> : "Login"}
+                                            </Button>
+
+                                            <div className="text-center text-sm">
+                                                Don&apos;t have an account?{" "}
+
+                                                <Link
+                                                    to="/sign-up"
+                                                    className="underline underline-offset-4"
+                                                >
+                                                    SignUp
+                                                </Link>
+                                            </div>
+
+                                        </div>
+
+
+
+
+
+
                                     </div>
-
-
-                                    <Button type="submit" className="w-full">
-                                        {loading ? <BtnLoader /> : "Login"}
-                                    </Button>
-
-
-                                    <p className="text-center text-sm text-muted-foreground">
-                                        Don't have an account?{" "}
-                                        <Link
-                                            to="/sign-up"
-                                            className="font-medium text-blue-600 hover:underline"
-                                        >
-                                            SignUp
-                                        </Link>
-                                    </p>
-                                </div>
-
+                                </Form>
                             </form>
-                        </Form>
-                    </div>
-                </CardContent>
-            </Card>
-        </div>
 
+                        </CardContent>
+                    </Card>
+                    {/* <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
+                        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
+                        and <a href="#">Privacy Policy</a>.
+                    </div> */}
+                </div>
+            </div>
+        </div>
     )
 }
 

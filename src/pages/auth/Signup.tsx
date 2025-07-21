@@ -1,13 +1,6 @@
 
-
 import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 
 import {
@@ -24,11 +17,11 @@ import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { toast } from "sonner"
-// import axios from "axios"
 import BtnLoader from "@/components/BtnLoader.tsx"
 
 
 const Signup = () => {
+
     const [loading, setLoading] = useState(false)
     const formSchema = z.object({
         username: z.string().min(2, {
@@ -68,96 +61,95 @@ const Signup = () => {
     }
 
 
-
-
     return (
-        <div className="sm:h-screen w-screen flex items-center justify-center p-5 sm:p-0">
-            <Card className="w-full max-w-2xl">
-                <CardContent className="flex flex-col md:flex-row items-center justify-center gap-8 py-8">
-                    {/* Image Section */}
-                    <div className="flex-shrink-0">
-                        <img
-                            src="https://static.vecteezy.com/system/resources/previews/023/841/800/original/adorable-blue-bots-small-cute-robots-generated-by-ai-free-png.png"
-                            alt="Bot"
-                            className="h-36 sm:h-68 w-42 sm:w-68 object-contain"
-                        />
-                    </div>
-
-                    {/* Form Section */}
-                    <div className="flex-1 w-full max-w-sm">
-                        <CardHeader className="p-0 pb-4">
-                            <CardTitle>Create  your account</CardTitle>
-                            <CardDescription>
-                                Enter your details below to create account
-                            </CardDescription>
-                        </CardHeader>
-
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-                                <FormField
-                                    control={form.control}
-                                    name="username"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Username</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Enter your username" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
+        <div className=" flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+            <div className="w-full max-w-sm md:max-w-3xl">
+                <div className="flex flex-col gap-6">
+                    <Card className="overflow-hidden p-0">
+                        <CardContent className="grid p-0 md:grid-cols-2">
+                            <div className=" relative hidden md:block">
+                                <img
+                                    src="https://static.vecteezy.com/system/resources/previews/023/841/800/original/adorable-blue-bots-small-cute-robots-generated-by-ai-free-png.png" alt="Image"
+                                    className="absolute inset-0 h-full w-full object-cover "
                                 />
-                                <FormField
-                                    control={form.control}
-                                    name="password"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Password</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="your password" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="location"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Location</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="your location" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <div className="space-y-4">
+                            </div>
+                            <form onSubmit={form.handleSubmit(handleSubmit)} className="p-6 md:p-8">
+                                <Form {...form}>
+                                    <div className="flex flex-col gap-6">
+                                        <div className="flex flex-col items-center text-center">
+                                            <h1 className="text-2xl font-bold">Welcome </h1>
+                                            <p className="text-muted-foreground text-balance">
+                                                Register to create  account
+                                            </p>
+                                        </div>
 
-                                    <Button type="submit" className="w-full">
-                                        {loading ? <BtnLoader /> : "Sign Up"}
-                                    </Button>
+                                        <FormField
+                                            control={form.control}
+                                            name="username"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Username</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="Enter your username" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="password"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Password</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="your password" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="location"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Location</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="your location" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <div className="space-y-4">
 
+                                            <Button type="submit" className="w-full">
+                                                {loading ? <BtnLoader /> : "SignUp"}
+                                            </Button>
 
-                                    <p className="text-center text-sm text-muted-foreground">
-                                        Already have an account?{" "}
-                                        <Link
-                                            to="/sign-in"
-                                            className="font-medium text-blue-600 hover:underline"
-                                        >
-                                            SignIn
-                                        </Link>
-                                    </p>
-                                </div>
+                                            <div className="text-center text-sm">
+                                                Already have an account?{" "}
 
+                                                <Link
+                                                    to="/sign-in"
+                                                    className="underline underline-offset-4"
+                                                >
+                                                    SignIn
+                                                </Link>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </Form>
                             </form>
-                        </Form>
-                    </div>
-                </CardContent>
-            </Card>
-        </div>
 
+                        </CardContent>
+                    </Card>
+
+                </div>
+            </div>
+        </div>
     )
 }
 
