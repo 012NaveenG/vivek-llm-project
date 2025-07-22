@@ -7,22 +7,31 @@ import SignIn from "./pages/auth/SignIn.tsx"
 import Landing from "./pages/landing/Landing.tsx"
 import Signup from "./pages/auth/Signup.tsx"
 import UserLayout from "./layouts/UserLayout.tsx"
+import { SidebarProvider } from "./components/ui/sidebar.tsx"
+import HomeLayout from "./layouts/HomeLayout.tsx"
 
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <Landing />,
+    element: <HomeLayout />,
+    children: [
+      {
+        path:"",
+        element:<Landing/>
+      },
+      {
+        path: "/sign-in",
+        element: <SignIn />
+      },
+      {
+        path: "/sign-up",
+        element: <Signup />
+      },
+    ]
 
   },
-  {
-    path: "/sign-in",
-    element: <SignIn />
-  },
-  {
-    path: "/sign-up",
-    element: <Signup />
-  },
+
   {
     path: '/u',
     element: <UserLayout />,
@@ -36,7 +45,11 @@ const router = createBrowserRouter([
 ])
 createRoot(document.getElementById('root')!).render(
   <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <RouterProvider router={router}></RouterProvider>
-    <Toaster position="top-center" richColors />
+    <SidebarProvider>
+
+      <RouterProvider router={router}></RouterProvider>
+      <Toaster position="top-center" richColors />
+    </SidebarProvider>
+
   </ThemeProvider>
 )

@@ -1,15 +1,22 @@
-import Navbar from "@/components/Navbar.tsx"
-import { Outlet } from "react-router-dom"
+import AppSidebar from "@/components/AppSidebar";
+import Navbar from "@/components/Navbar";
+import { Outlet } from "react-router-dom";
 
 const UserLayout = () => {
-    return (
-        <div>
-            <Navbar />
-            <div className="flex items-center justify-between">
-                <Outlet />
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="flex h-screen w-screen overflow-hidden">
+     
+      <AppSidebar />
 
-export default UserLayout
+     
+      <div className="flex flex-col flex-1 overflow-hidden">
+        <Navbar />
+        <main className="flex-1 overflow-y-auto p-4 bg-muted">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export default UserLayout;
