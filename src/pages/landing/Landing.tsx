@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom"
 
 const Landing = () => {
     const navigate = useNavigate()
+    const hasSeenVideo = localStorage.getItem("hasSeenSplash")
+    console.log(hasSeenVideo)
 
     useEffect(() => {
-        const hasSeenVideo = localStorage.getItem("hasSeenSplash")
 
         if (hasSeenVideo) {
             // User already saw splash, directly go to login
@@ -15,7 +16,7 @@ const Landing = () => {
             const timer = setTimeout(() => {
                 localStorage.setItem("hasSeenSplash", "true")
                 navigate("/sign-in")
-            }, 3000)
+            }, 6000)
 
             return () => clearTimeout(timer)
         }
