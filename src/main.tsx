@@ -6,26 +6,37 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import SignIn from "./pages/auth/SignIn.tsx"
 import Landing from "./pages/landing/Landing.tsx"
 import Signup from "./pages/auth/Signup.tsx"
+import UserLayout from "./layouts/UserLayout.tsx"
 
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <Landing/>,
-    
+    element: <Landing />,
+
   },
   {
-    path:"/sign-in",
-    element:<SignIn/>
+    path: "/sign-in",
+    element: <SignIn />
   },
   {
-    path:"/sign-up",
-    element:<Signup/>
+    path: "/sign-up",
+    element: <Signup />
+  },
+  {
+    path: '/u',
+    element: <UserLayout />,
+    children: [
+      {
+        path: "",
+        element: "User dashboard"
+      }
+    ]
   }
 ])
 createRoot(document.getElementById('root')!).render(
   <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
     <RouterProvider router={router}></RouterProvider>
-    <Toaster position="top-center" richColors   />
+    <Toaster position="top-center" richColors />
   </ThemeProvider>
 )
