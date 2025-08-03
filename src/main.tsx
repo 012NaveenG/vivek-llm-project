@@ -12,6 +12,7 @@ import HomeLayout from "./layouts/HomeLayout.tsx"
 import Ignore from "./pages/Modules/DirectInjection/Ignore.tsx"
 import ReasonAndAct from "./pages/Modules/DirectInjection/ReasonAndAct.tsx"
 import ChainOfThoughts from "./pages/Modules/DirectInjection/ChainOfThoughts.tsx"
+import InstructionOverride from "./pages/Modules/DirectInjection/InstructionOverride.tsx"
 
 
 const router = createBrowserRouter([
@@ -20,8 +21,8 @@ const router = createBrowserRouter([
     element: <HomeLayout />,
     children: [
       {
-        path:"",
-        element:<Landing/>
+        path: "",
+        element: <Landing />
       },
       {
         path: "/sign-in",
@@ -41,19 +42,23 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Ignore/>
+        element: <Ignore />
       },
       {
         path: "/u/direct-injection/ignore",
-        element: <Ignore/>
+        element: <Ignore />
       },
       {
         path: "/u/direct-injection/reason-act",
-        element: <ReasonAndAct/>
+        element: <ReasonAndAct />
       },
       {
         path: "/u/direct-injection/chain-of-thoughts",
-        element: <ChainOfThoughts/>
+        element: <ChainOfThoughts />
+      },
+      {
+        path: "/u/direct-injection/instructions-override",
+        element: <InstructionOverride />
       },
     ]
   }

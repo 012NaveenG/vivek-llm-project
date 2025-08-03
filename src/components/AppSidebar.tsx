@@ -28,7 +28,7 @@ const AppSidebar = () => {
                 { title: "Ignore", url: "/u/direct-injection/ignore" },
                 { title: "Reason and Act ", url: "/u/direct-injection/reason-act" },
                 { title: "Chain of Thoughts", url: "/u/direct-injection/chain-of-thoughts" },
-                { title: "Instructions Override", url: "#" },
+                { title: "Instructions Override", url: "/u/direct-injection/instructions-override" },
                 { title: "Language", url: "#" },
             ],
         },
