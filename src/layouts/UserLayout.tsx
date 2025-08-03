@@ -11,7 +11,7 @@ const UserLayout = () => {
      
       <div className="flex flex-col flex-1 overflow-hidden">
         <Navbar />
-        <main className="flex-1 overflow-y-auto p-4 bg-muted">
+        <main className="flex-1 overflow-y-auto p-1 bg-muted scrollbar-hidden">
           <Outlet />
         </main>
       </div>

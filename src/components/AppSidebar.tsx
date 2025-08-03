@@ -21,24 +21,31 @@ import { Link } from "react-router-dom"
 const AppSidebar = () => {
     const navMain = [
         {
-            title: "Module 1",
-            url: "#",
+            title: "Direct Injection",
             icon: FolderKanban,
             isActive: true,
             items: [
-                { title: "Lab 1", url: "#" },
-                { title: "Lab 2", url: "#" },
-                { title: "Lab 3", url: "#" },
+                { title: "Ignore", url: "/u/direct-injection/ignore" },
+                { title: "Reason and Act ", url: "/u/direct-injection/reason-act" },
+                { title: "Chain of Thoughts", url: "#" },
+                { title: "Instructions Override", url: "#" },
+                { title: "Language", url: "#" },
             ],
         },
         {
-            title: "Module 2",
-            url: "#",
+            title: "Indirect Injection",
             icon: FlaskConical,
             items: [
-                { title: "Lab 1", url: "#" },
-                { title: "Lab 2", url: "#" },
-                { title: "Lab 3", url: "#" },
+                { title: "Comment", url: "#" },
+                { title: "Encoded", url: "#" }
+            ],
+        },
+        {
+            title: "Broken Access Control",
+            icon: FlaskConical,
+            items: [
+                { title: "Persona", url: "#" },
+                { title: "Chat History", url: "#" }
             ],
         },
     ]
@@ -58,7 +65,6 @@ export function NavMain({
 }: {
     items: {
         title: string
-        url: string
         icon?: LucideIcon
         isActive?: boolean
         items?: {

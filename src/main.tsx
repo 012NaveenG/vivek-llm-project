@@ -9,6 +9,8 @@ import Signup from "./pages/auth/Signup.tsx"
 import UserLayout from "./layouts/UserLayout.tsx"
 import { SidebarProvider } from "./components/ui/sidebar.tsx"
 import HomeLayout from "./layouts/HomeLayout.tsx"
+import Ignore from "./pages/Modules/DirectInjection/Ignore.tsx"
+import ReasonAndAct from "./pages/Modules/DirectInjection/ReasonAndAct.tsx"
 
 
 const router = createBrowserRouter([
@@ -38,8 +40,16 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: "User dashboard"
-      }
+        element: <Ignore/>
+      },
+      {
+        path: "/u/direct-injection/ignore",
+        element: <Ignore/>
+      },
+      {
+        path: "/u/direct-injection/reason-act",
+        element: <ReasonAndAct/>
+      },
     ]
   }
 ])
