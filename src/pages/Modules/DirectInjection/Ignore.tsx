@@ -1,5 +1,5 @@
 import { useState, type KeyboardEvent, type ChangeEvent } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
 
 type MessageType = 'user' | 'bot';
 

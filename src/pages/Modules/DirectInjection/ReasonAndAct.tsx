@@ -1,6 +1,6 @@
 
-import React, { useState, type KeyboardEvent } from 'react';
-import axios from 'axios';
+import  { useState, type KeyboardEvent } from 'react';
+// import axios from 'axios';
 
 interface Message {
     type: 'user' | 'bot';

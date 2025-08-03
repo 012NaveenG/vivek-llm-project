@@ -11,6 +11,7 @@ import { SidebarProvider } from "./components/ui/sidebar.tsx"
 import HomeLayout from "./layouts/HomeLayout.tsx"
 import Ignore from "./pages/Modules/DirectInjection/Ignore.tsx"
 import ReasonAndAct from "./pages/Modules/DirectInjection/ReasonAndAct.tsx"
+import ChainOfThoughts from "./pages/Modules/DirectInjection/ChainOfThoughts.tsx"
 
 
 const router = createBrowserRouter([
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/u/direct-injection/reason-act",
         element: <ReasonAndAct/>
+      },
+      {
+        path: "/u/direct-injection/chain-of-thoughts",
+        element: <ChainOfThoughts/>
       },
     ]
   }
