@@ -13,6 +13,7 @@ import Ignore from "./pages/Modules/DirectInjection/Ignore.tsx"
 import ReasonAndAct from "./pages/Modules/DirectInjection/ReasonAndAct.tsx"
 import ChainOfThoughts from "./pages/Modules/DirectInjection/ChainOfThoughts.tsx"
 import InstructionOverride from "./pages/Modules/DirectInjection/InstructionOverride.tsx"
+import { Language } from "./pages/Modules/DirectInjection/Language.tsx"
 
 
 const router = createBrowserRouter([
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/u/direct-injection/instructions-override",
         element: <InstructionOverride />
+      },
+      {
+        path: "/u/direct-injection/language",
+        element: <Language />
       },
     ]
   }

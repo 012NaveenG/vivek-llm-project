@@ -29,7 +29,7 @@ const AppSidebar = () => {
                 { title: "Reason and Act ", url: "/u/direct-injection/reason-act" },
                 { title: "Chain of Thoughts", url: "/u/direct-injection/chain-of-thoughts" },
                 { title: "Instructions Override", url: "/u/direct-injection/instructions-override" },
-                { title: "Language", url: "#" },
+                { title: "Language", url: "/u/direct-injection/language" },
             ],
         },
         {
