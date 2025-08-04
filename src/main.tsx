@@ -18,6 +18,8 @@ import { Language } from "./pages/Modules/DirectInjection/Language.tsx"
 import Comment2 from "./pages/Modules/IndirectInjection/Comment2.tsx"
 import Encoded from "./pages/Modules/IndirectInjection/Encoded.tsx"
 import Persona from "./pages/Modules/BrokenAcessControl/Persona.tsx"
+import ChatHistory from "./pages/Modules/BrokenAcessControl/ChatHistory.tsx"
+import CodeInjection from "./pages/Modules/InsecureOutputHandling/CodeInjection.tsx"
 
 
 const router = createBrowserRouter([
@@ -89,8 +91,19 @@ const router = createBrowserRouter([
         element: <Persona />
       },
       {
-        path: "/u/indirect-injection/encoded",
-        element: <Encoded />
+        path: "/u/broken-acess-control/chat-history",
+        element: <ChatHistory />
+      },
+
+
+      // Module-4: Insecure Output Handling
+      {
+        path: "/u/insecure-output-handling/code-injection",
+        element: <CodeInjection />
+      },
+      {
+        path: "/u/broken-acess-control/chat-history",
+        element: <ChatHistory />
       },
 
     ]

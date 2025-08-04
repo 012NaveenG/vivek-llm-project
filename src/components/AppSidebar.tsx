@@ -45,7 +45,15 @@ const AppSidebar = () => {
             icon: FlaskConical,
             items: [
                 { title: "Persona", url: "/u/broken-acess-control/persona" },
-                { title: "Chat History", url: "#" }
+                { title: "Chat History", url: "/u/broken-acess-control/chat-history" }
+            ],
+        },
+        {
+            title: "Insecure Output Handling",
+            icon: FlaskConical,
+            items: [
+                { title: "Code Injection", url: "/u/insecure-output-handling/code-injection" },
+                { title: "SQL", url: "/u/broken-acess-control/chat-history" }
             ],
         },
     ]
