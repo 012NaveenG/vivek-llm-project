@@ -17,6 +17,7 @@ import { Language } from "./pages/Modules/DirectInjection/Language.tsx"
 // import Comment from "./pages/Modules/IndirectInjection/Comment.tsx"
 import Comment2 from "./pages/Modules/IndirectInjection/Comment2.tsx"
 import Encoded from "./pages/Modules/IndirectInjection/Encoded.tsx"
+import Persona from "./pages/Modules/BrokenAcessControl/Persona.tsx"
 
 
 const router = createBrowserRouter([
@@ -76,6 +77,16 @@ const router = createBrowserRouter([
       {
         path: "/u/indirect-injection/comment",
         element: <Comment2 />
+      },
+      {
+        path: "/u/indirect-injection/encoded",
+        element: <Encoded />
+      },
+
+      // Module-3: Broken Access Control
+      {
+        path: "/u/broken-acess-control/persona",
+        element: <Persona />
       },
       {
         path: "/u/indirect-injection/encoded",

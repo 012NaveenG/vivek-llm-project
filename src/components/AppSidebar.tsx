@@ -44,7 +44,7 @@ const AppSidebar = () => {
             title: "Broken Access Control",
             icon: FlaskConical,
             items: [
-                { title: "Persona", url: "#" },
+                { title: "Persona", url: "/u/broken-acess-control/persona" },
                 { title: "Chat History", url: "#" }
             ],
         },
