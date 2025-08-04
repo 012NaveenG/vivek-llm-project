@@ -14,6 +14,8 @@ import ReasonAndAct from "./pages/Modules/DirectInjection/ReasonAndAct.tsx"
 import ChainOfThoughts from "./pages/Modules/DirectInjection/ChainOfThoughts.tsx"
 import InstructionOverride from "./pages/Modules/DirectInjection/InstructionOverride.tsx"
 import { Language } from "./pages/Modules/DirectInjection/Language.tsx"
+import Comment from "./pages/Modules/IndirectInjection/Comment.tsx"
+import Comment2 from "./pages/Modules/IndirectInjection/Comment2.tsx"
 
 
 const router = createBrowserRouter([
@@ -45,6 +47,8 @@ const router = createBrowserRouter([
         path: "",
         element: <Ignore />
       },
+
+      // Module-1: Direct Injection
       {
         path: "/u/direct-injection/ignore",
         element: <Ignore />
@@ -65,6 +69,14 @@ const router = createBrowserRouter([
         path: "/u/direct-injection/language",
         element: <Language />
       },
+
+
+      // Module-2: Indirect Injection
+      {
+        path: "/u/indirect-injection/comment",
+        element: <Comment2 />
+      },
+
     ]
   }
 ])

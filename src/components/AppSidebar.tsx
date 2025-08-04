@@ -36,7 +36,7 @@ const AppSidebar = () => {
             title: "Indirect Injection",
             icon: FlaskConical,
             items: [
-                { title: "Comment", url: "#" },
+                { title: "Comment", url:  "/u/indirect-injection/comment" },
                 { title: "Encoded", url: "#" }
             ],
         },
