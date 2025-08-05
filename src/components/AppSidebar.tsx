@@ -77,6 +77,13 @@ const AppSidebar = () => {
                 { title: "Rug Pull", url: "/u/rugpull/rug-pull" },
             ],
         },
+        {
+            title: "SSRF",
+            icon: FlaskConical,
+            items: [
+                { title: "SSRF", url: "/u/ssrf/ssrf" },
+            ],
+        },
     ]
     return (
         <Sidebar>

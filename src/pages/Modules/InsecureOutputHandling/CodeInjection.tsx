@@ -358,19 +358,19 @@ const CodeInjection = () => {
                                 <h3 className="text-2xl font-semibold text-gray-800 mb-6">Send Us a Message</h3>
                                 <form className="space-y-4">
                                     <div>
-                                        <label className="block text-gray-700 mb-2" htmlhtmlhtmlhtmlhtmlFor="name">Full Name</label>
+                                        <label className="block text-gray-700 mb-2" htmlFor="name">Full Name</label>
                                         <input type="text" id="name" className="w-full text-neutral-700 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Your name" />
                                     </div>
                                     <div>
-                                        <label className="block text-gray-700 mb-2" htmlhtmlhtmlhtmlhtmlFor="email">Email Address</label>
+                                        <label className="block text-gray-700 mb-2" htmlFor="email">Email Address</label>
                                         <input type="email" id="email" className="w-full text-neutral-700 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Your email" />
                                     </div>
                                     <div>
-                                        <label className="block text-gray-700 mb-2" htmlhtmlhtmlhtmlhtmlFor="subject">Subject</label>
+                                        <label className="block text-gray-700 mb-2" htmlFor="subject">Subject</label>
                                         <input type="text" id="subject" className="w-full text-neutral-700 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Subject" />
                                     </div>
                                     <div>
-                                        <label className="block text-gray-700 mb-2" htmlhtmlhtmlhtmlhtmlFor="message">Message</label>
+                                        <label className="block text-gray-700 mb-2" htmlFor="message">Message</label>
                                         <textarea id="message" rows={4} className="w-full text-neutral-700 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Your message"></textarea>
                                     </div>
                                     <div>

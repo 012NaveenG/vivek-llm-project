@@ -24,6 +24,7 @@ import SQLInjection from "./pages/Modules/InsecureOutputHandling/SQLInjection.ts
 import Misinformation from "./pages/Modules/Hallucinations/Misinformation.tsx"
 import SystemPromptLeakage from "./pages/Modules/SensitiveInformationDisclosure/SystemPromptLeakage.tsx"
 import RugPull from "./pages/Modules/RugPull/RugPull.tsx"
+import Ssrf from "./pages/Modules/SSRF/Ssrf.tsx"
 
 
 const router = createBrowserRouter([
@@ -126,6 +127,12 @@ const router = createBrowserRouter([
       {
         path: "/u/rugpull/rug-pull",
         element: <RugPull />
+      },
+
+      // Module-8: SSRF
+      {
+        path: "/u/ssrf/ssrf",
+        element: <Ssrf />
       },
      
 
