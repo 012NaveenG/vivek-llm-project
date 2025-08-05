@@ -14,19 +14,37 @@ import {
     SidebarMenuSubButton,
     SidebarMenuSubItem,
 } from "./ui/sidebar"
-import { FlaskConical, FolderKanban } from "lucide-react"
-import { ChevronRight, type LucideIcon } from "lucide-react"
+import { ChevronRight } from "lucide-react"
+
+import {
+    type LucideIcon,
+    ShieldOff,
+    FileWarning,
+    BrainCog,
+    Languages,
+    Lock,
+    MessageSquareWarning,
+    Activity,
+    Network,
+    ServerCrash,
+    PackageCheck,
+    
+    Ghost,
+    KeyRound,
+    Bot
+} from "lucide-react";
+
 import { Link } from "react-router-dom"
 
 const AppSidebar = () => {
     const navMain = [
         {
             title: "Direct Injection",
-            icon: FolderKanban,
+            icon: ShieldOff, // 🔐 Security bypass
             isActive: true,
             items: [
                 { title: "Ignore", url: "/u/direct-injection/ignore" },
-                { title: "Reason and Act ", url: "/u/direct-injection/reason-act" },
+                { title: "Reason and Act", url: "/u/direct-injection/reason-act" },
                 { title: "Chain of Thoughts", url: "/u/direct-injection/chain-of-thoughts" },
                 { title: "Instructions Override", url: "/u/direct-injection/instructions-override" },
                 { title: "Language", url: "/u/direct-injection/language" },
@@ -34,7 +52,7 @@ const AppSidebar = () => {
         },
         {
             title: "Indirect Injection",
-            icon: FlaskConical,
+            icon: MessageSquareWarning, // 💬 Comments and Encoded content
             items: [
                 { title: "Comment", url: "/u/indirect-injection/comment" },
                 { title: "Encoded", url: "/u/indirect-injection/encoded" }
@@ -42,7 +60,7 @@ const AppSidebar = () => {
         },
         {
             title: "Broken Access Control",
-            icon: FlaskConical,
+            icon: Lock, // 🔓 Unauthorized access
             items: [
                 { title: "Persona", url: "/u/broken-acess-control/persona" },
                 { title: "Chat History", url: "/u/broken-acess-control/chat-history" }
@@ -50,7 +68,7 @@ const AppSidebar = () => {
         },
         {
             title: "Insecure Output Handling",
-            icon: FlaskConical,
+            icon: FileWarning, // ⚠️ Output vulnerabilities
             items: [
                 { title: "Code Injection", url: "/u/insecure-output-handling/code-injection" },
                 { title: "SQL", url: "/u/insecure-output-handling/sql-injection" }
@@ -58,68 +76,68 @@ const AppSidebar = () => {
         },
         {
             title: "Hallucinations",
-            icon: FlaskConical,
+            icon: BrainCog, // 🧠 Misinformation, hallucination
             items: [
                 { title: "Misinformation", url: "/u/hallucinations/misinformation" },
             ],
         },
         {
             title: "Sensitive Info Disclosure",
-            icon: FlaskConical,
+            icon: Languages, // 🌐 Prompt/system language leaks
             items: [
-                { title: "Misinformation", url: "/u/sensitive-info-disclosure/system-prompt-leakage" },
+                { title: "System Prompt Leakage", url: "/u/sensitive-info-disclosure/system-prompt-leakage" },
             ],
         },
         {
             title: "Rug Pull",
-            icon: FlaskConical,
+            icon: Activity, // 📉 Sudden drop / malicious change
             items: [
                 { title: "Rug Pull", url: "/u/rugpull/rug-pull" },
             ],
         },
         {
             title: "SSRF",
-            icon: FlaskConical,
+            icon: Network, // 🌐 Server-side request forgery
             items: [
                 { title: "SSRF", url: "/u/ssrf/ssrf" },
             ],
         },
         {
             title: "Supply Chain",
-            icon: FlaskConical,
+            icon: PackageCheck, // 📦 Package-level threat
             items: [
                 { title: "Supply Chain", url: "/u/supply-chain/supplychain" },
             ],
         },
         {
             title: "Unbounded Consumption",
-            icon: FlaskConical,
+            icon: ServerCrash, // 💥 Resource overuse
             items: [
                 { title: "Unbounded Consumption", url: "/u/unbounded-consumption/unboundedconsumption" },
             ],
         },
         {
             title: "Tool Shadowing",
-            icon: FlaskConical,
+            icon: Ghost, // 👻 Shadow tools replacing originals
             items: [
                 { title: "Tool Shadowing", url: "/u/tool-shadowing/toolshadowing" },
             ],
         },
         {
             title: "Token Theft",
-            icon: FlaskConical,
+            icon: KeyRound, // 🔑 Token/key leakage
             items: [
                 { title: "Token Theft", url: "/u/token-theft/tokentheft" },
             ],
         },
         {
             title: "Excessive Agency",
-            icon: FlaskConical,
+            icon: Bot, // 🤖 AI doing too much without control
             items: [
                 { title: "Excessive Agency", url: "/u/excessive-agency/excessive-agency" },
             ],
         },
-    ]
+    ];
     return (
         <Sidebar>
             <NavMain items={navMain} />
