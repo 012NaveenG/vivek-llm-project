@@ -28,6 +28,7 @@ import Ssrf from "./pages/Modules/SSRF/Ssrf.tsx"
 import SupplyChain from "./pages/Modules/SupplyChain/SupplyChain.tsx"
 import UnboundConsumption from "./pages/Modules/UnboundedConsumption/UnboundConsumption.tsx"
 import ToolShadowing from "./pages/Modules/ToolShadowing/ToolShadowing.tsx"
+import TokenTheft from "./pages/Modules/TokenTheft/TokenTheft.tsx"
 
 
 const router = createBrowserRouter([
@@ -154,6 +155,13 @@ const router = createBrowserRouter([
       {
         path: "/u/tool-shadowing/toolshadowing",
         element: <ToolShadowing />
+      },
+     
+
+      // Module-12: Token Theft
+      {
+        path: "/u/token-theft/tokentheft",
+        element: <TokenTheft />
       },
      
 
