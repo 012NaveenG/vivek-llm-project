@@ -112,6 +112,13 @@ const AppSidebar = () => {
                 { title: "Token Theft", url: "/u/token-theft/tokentheft" },
             ],
         },
+        {
+            title: "Excessive Agency",
+            icon: FlaskConical,
+            items: [
+                { title: "Excessive Agency", url: "/u/excessive-agency/excessive-agency" },
+            ],
+        },
     ]
     return (
         <Sidebar>

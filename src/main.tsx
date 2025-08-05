@@ -29,6 +29,7 @@ import SupplyChain from "./pages/Modules/SupplyChain/SupplyChain.tsx"
 import UnboundConsumption from "./pages/Modules/UnboundedConsumption/UnboundConsumption.tsx"
 import ToolShadowing from "./pages/Modules/ToolShadowing/ToolShadowing.tsx"
 import TokenTheft from "./pages/Modules/TokenTheft/TokenTheft.tsx"
+import ExcessiveAgency from "./pages/Modules/ExcessiveAgency/ExcessiveAgency.tsx"
 
 
 const router = createBrowserRouter([
@@ -162,6 +163,12 @@ const router = createBrowserRouter([
       {
         path: "/u/token-theft/tokentheft",
         element: <TokenTheft />
+      },
+
+      // Module-13: Excessive Agency
+      {
+        path: "/u/excessive-agency/excessive-agency",
+        element: <ExcessiveAgency />
       },
      
 
