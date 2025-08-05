@@ -25,6 +25,9 @@ import Misinformation from "./pages/Modules/Hallucinations/Misinformation.tsx"
 import SystemPromptLeakage from "./pages/Modules/SensitiveInformationDisclosure/SystemPromptLeakage.tsx"
 import RugPull from "./pages/Modules/RugPull/RugPull.tsx"
 import Ssrf from "./pages/Modules/SSRF/Ssrf.tsx"
+import SupplyChain from "./pages/Modules/SupplyChain/SupplyChain.tsx"
+import UnboundConsumption from "./pages/Modules/UnboundedConsumption/UnboundConsumption.tsx"
+import ToolShadowing from "./pages/Modules/ToolShadowing/ToolShadowing.tsx"
 
 
 const router = createBrowserRouter([
@@ -133,6 +136,24 @@ const router = createBrowserRouter([
       {
         path: "/u/ssrf/ssrf",
         element: <Ssrf />
+      },
+
+      // Module-9: Supply Chain
+      {
+        path: "/u/supply-chain/supplychain",
+        element: <SupplyChain />
+      },
+
+      // Module-10: Unbounded Consumption
+      {
+        path: "/u/unbounded-consumption/unboundedconsumption",
+        element: <UnboundConsumption />
+      },
+
+      // Module-11: Tool Shadowing
+      {
+        path: "/u/tool-shadowing/toolshadowing",
+        element: <ToolShadowing />
       },
      
 

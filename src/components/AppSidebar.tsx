@@ -84,6 +84,27 @@ const AppSidebar = () => {
                 { title: "SSRF", url: "/u/ssrf/ssrf" },
             ],
         },
+        {
+            title: "Supply Chain",
+            icon: FlaskConical,
+            items: [
+                { title: "Supply Chain", url: "/u/supply-chain/supplychain" },
+            ],
+        },
+        {
+            title: "Unbounded Consumption",
+            icon: FlaskConical,
+            items: [
+                { title: "Unbounded Consumption", url: "/u/unbounded-consumption/unboundedconsumption" },
+            ],
+        },
+        {
+            title: "Tool Shadowing",
+            icon: FlaskConical,
+            items: [
+                { title: "Tool Shadowing", url: "/u/tool-shadowing/toolshadowing" },
+            ],
+        },
     ]
     return (
         <Sidebar>
