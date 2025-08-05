@@ -20,6 +20,9 @@ import Encoded from "./pages/Modules/IndirectInjection/Encoded.tsx"
 import Persona from "./pages/Modules/BrokenAcessControl/Persona.tsx"
 import ChatHistory from "./pages/Modules/BrokenAcessControl/ChatHistory.tsx"
 import CodeInjection from "./pages/Modules/InsecureOutputHandling/CodeInjection.tsx"
+import SQLInjection from "./pages/Modules/InsecureOutputHandling/SQLInjection.tsx"
+import Misinformation from "./pages/Modules/Hallucinations/Misinformation.tsx"
+import SystemPromptLeakage from "./pages/Modules/SensitiveInformationDisclosure/SystemPromptLeakage.tsx"
 
 
 const router = createBrowserRouter([
@@ -102,9 +105,31 @@ const router = createBrowserRouter([
         element: <CodeInjection />
       },
       {
-        path: "/u/broken-acess-control/chat-history",
-        element: <ChatHistory />
+        path: "/u/insecure-output-handling/sql-injection",
+        element: <SQLInjection />
       },
+
+      // Module-5: Hallucinations	
+      {
+        path: "/u/hallucinations/misinformation",
+        element: <Misinformation />
+      },
+
+      // Module-6: Sensitive Information Disclosure	
+      {
+        path: "/u/sensitive-info-disclosure/system-prompt-leakage",
+        element: <SystemPromptLeakage />
+      },
+     
+      // Module-7: Rug Pull	
+      {
+        path: "/u/rugpull/rug-pull",
+        element: <SystemPromptLeakage />
+      },
+     
+
+
+
 
     ]
   }

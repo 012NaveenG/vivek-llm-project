@@ -53,7 +53,28 @@ const AppSidebar = () => {
             icon: FlaskConical,
             items: [
                 { title: "Code Injection", url: "/u/insecure-output-handling/code-injection" },
-                { title: "SQL", url: "/u/broken-acess-control/chat-history" }
+                { title: "SQL", url: "/u/insecure-output-handling/sql-injection" }
+            ],
+        },
+        {
+            title: "Hallucinations",
+            icon: FlaskConical,
+            items: [
+                { title: "Misinformation", url: "/u/hallucinations/misinformation" },
+            ],
+        },
+        {
+            title: "Sensitive Info Disclosure",
+            icon: FlaskConical,
+            items: [
+                { title: "Misinformation", url: "/u/sensitive-info-disclosure/system-prompt-leakage" },
+            ],
+        },
+        {
+            title: "Rug Pull",
+            icon: FlaskConical,
+            items: [
+                { title: "Rug Pull", url: "/u/rugpull/rug-pull" },
             ],
         },
     ]
