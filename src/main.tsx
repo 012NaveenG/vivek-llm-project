@@ -23,6 +23,7 @@ import CodeInjection from "./pages/Modules/InsecureOutputHandling/CodeInjection.
 import SQLInjection from "./pages/Modules/InsecureOutputHandling/SQLInjection.tsx"
 import Misinformation from "./pages/Modules/Hallucinations/Misinformation.tsx"
 import SystemPromptLeakage from "./pages/Modules/SensitiveInformationDisclosure/SystemPromptLeakage.tsx"
+import RugPull from "./pages/Modules/RugPull/RugPull.tsx"
 
 
 const router = createBrowserRouter([
@@ -124,7 +125,7 @@ const router = createBrowserRouter([
       // Module-7: Rug Pull	
       {
         path: "/u/rugpull/rug-pull",
-        element: <SystemPromptLeakage />
+        element: <RugPull />
       },
      
 
