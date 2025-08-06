@@ -180,7 +180,7 @@ const router = createBrowserRouter([
 ])
 createRoot(document.getElementById('root')!).render(
   <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <SidebarProvider>
+    <SidebarProvider >
 
       <RouterProvider router={router}></RouterProvider>
       <Toaster position="top-center" richColors />

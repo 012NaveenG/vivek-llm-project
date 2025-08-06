@@ -1,5 +1,5 @@
-import AppSidebar from "@/components/AppSidebar";
-import Navbar from "@/components/Navbar";
+import AppSidebar from "@/components/AppSidebar.tsx";
+import Navbar from "@/components/Navbar.tsx";
 import { Outlet } from "react-router-dom";
 
 const UserLayout = () => {

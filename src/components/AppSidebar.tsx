@@ -139,7 +139,7 @@ const AppSidebar = () => {
         },
     ];
     return (
-        <Sidebar>
+        <Sidebar >
             <NavMain items={navMain} />
         </Sidebar>
     )
@@ -163,7 +163,7 @@ export function NavMain({
     }[]
 }) {
     return (
-        <SidebarGroup>
+        <SidebarGroup className="overflow-y-auto h-[95vh] scrollbar-hidden ">
             <SidebarGroupLabel>Modules</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) => (
