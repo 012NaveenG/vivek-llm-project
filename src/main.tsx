@@ -14,8 +14,6 @@ import ReasonAndAct from "./pages/Modules/DirectInjection/ReasonAndAct.tsx"
 import ChainOfThoughts from "./pages/Modules/DirectInjection/ChainOfThoughts.tsx"
 import InstructionOverride from "./pages/Modules/DirectInjection/InstructionOverride.tsx"
 import { Language } from "./pages/Modules/DirectInjection/Language.tsx"
-// import Comment from "./pages/Modules/IndirectInjection/Comment.tsx"
-import Comment2 from "./pages/Modules/IndirectInjection/Comment2.tsx"
 import Encoded from "./pages/Modules/IndirectInjection/Encoded.tsx"
 import Persona from "./pages/Modules/BrokenAcessControl/Persona.tsx"
 import ChatHistory from "./pages/Modules/BrokenAcessControl/ChatHistory.tsx"
@@ -30,6 +28,7 @@ import UnboundConsumption from "./pages/Modules/UnboundedConsumption/UnboundCons
 import ToolShadowing from "./pages/Modules/ToolShadowing/ToolShadowing.tsx"
 import TokenTheft from "./pages/Modules/TokenTheft/TokenTheft.tsx"
 import ExcessiveAgency from "./pages/Modules/ExcessiveAgency/ExcessiveAgency.tsx"
+import Comment from "./pages/Modules/IndirectInjection/Comment.tsx"
 
 
 const router = createBrowserRouter([
@@ -88,7 +87,7 @@ const router = createBrowserRouter([
       // Module-2: Indirect Injection
       {
         path: "/u/indirect-injection/comment",
-        element: <Comment2 />
+        element: <Comment />
       },
       {
         path: "/u/indirect-injection/encoded",

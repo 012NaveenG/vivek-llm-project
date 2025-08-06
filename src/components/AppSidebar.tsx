@@ -163,7 +163,7 @@ export function NavMain({
     }[]
 }) {
     return (
-        <SidebarGroup className="overflow-y-auto h-[95vh] scrollbar-hidden ">
+        <SidebarGroup className="overflow-y-auto h-[95vh] scrollbar-hidden pb-10 ">
             <SidebarGroupLabel>Modules</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) => (
