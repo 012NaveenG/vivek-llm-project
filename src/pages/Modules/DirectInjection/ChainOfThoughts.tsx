@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import type { JSX } from "react/jsx-runtime";
-
+import { APIs } from "../../../utils/BotApis.ts"
+import axios from "axios"
+import { toast } from "sonner";
 interface Quiz {
   question: string;
   options: string[];
@@ -63,8 +65,15 @@ export default function EduBot() {
     }, 500);
   }
 
-  function addUserMessage(text: string) {
-    setMessages((msgs) => [...msgs, <UserMessage key={Date.now()}>{text}</UserMessage>]);
+  async function addUserMessage(text: string) {
+    try {
+      console.log({ text })
+
+      await axios.post(APIs.CHAIN_OF_THOUGHTS, { text })
+      setMessages((msgs) => [...msgs, <UserMessage key={Date.now()}>{text}</UserMessage>]);
+    } catch (error: any) {
+      toast.error(error.message)
+    }
   }
 
   function addBotMessage(text: string, emoji: string = "🤖") {
@@ -135,7 +144,7 @@ export default function EduBot() {
           >
             {messages}
             <BotMessage emoji="📚">
-              Choose a subject to get started:
+              <p>Choose a subject to get started:</p>
               <div className="grid grid-cols-2 gap-2 mt-3">
                 {Object.keys(quizzes).map((subject) => (
                   <button

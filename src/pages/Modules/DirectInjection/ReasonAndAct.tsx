@@ -1,5 +1,8 @@
 
-import  { useState, type KeyboardEvent } from 'react';
+import { APIs } from '@/utils/BotApis';
+import axios from 'axios';
+import { useState, type KeyboardEvent } from 'react';
+import { toast } from 'sonner';
 // import axios from 'axios';
 
 interface Message {
@@ -15,19 +18,24 @@ const ReasonAndAct = () => {
 
     const sendMessage = async () => {
         if (!input.trim()) return;
+        try {
 
-        const userMessage: Message = { type: 'user', text: input.trim() };
-        setMessages((prev) => [...prev, userMessage]);
+            const userMessage: Message = { type: 'user', text: input.trim() };
 
-        // await axios.post('/api/securebank', { message: input.trim() });
+            setMessages((prev) => [...prev, userMessage]);
 
-        // Simulate bot response
-        setTimeout(() => {
-            const botMessage: Message = { type: 'bot', text: `${input.trim()}` };
-            setMessages((prev) => [...prev, botMessage]);
-        }, 600);
+            await axios.post(APIs.REASON_AND_REACT, { user_input: input.trim() });
 
-        setInput('');
+            // Simulate bot response
+            setTimeout(() => {
+                const botMessage: Message = { type: 'bot', text: `${input.trim()}` };
+                setMessages((prev) => [...prev, botMessage]);
+            }, 600);
+
+            setInput('');
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {

@@ -1,4 +1,7 @@
+import { APIs } from '@/utils/BotApis';
+import axios from 'axios';
 import { useState, type KeyboardEvent, type ChangeEvent } from 'react';
+import { toast } from 'sonner';
 // import axios from 'axios'
 
 type MessageType = 'user' | 'bot';
@@ -40,18 +43,19 @@ const Ignore = () => {
         const botMessage: Message = { type: 'bot', text: getHRResponse(input.trim()) };
 
         try {
+
             // 👇 Replace with your actual backend URL
-            // await axios.post('http://localhost:5000/api/message', {
-            //   message: input.trim(),
-            // });
+            await axios.post(APIs.IGNORE, {
+                message: input.trim(),
+            });
 
             setMessages((prev) => [...prev, userMessage]);
 
             setTimeout(() => {
                 setMessages((prev) => [...prev, botMessage]);
             }, 600);
-        } catch (error) {
-            console.error('Failed to send message to backend:', error);
+        } catch (error: any) {
+            toast.error(error.message)
         }
 
         setInput('');

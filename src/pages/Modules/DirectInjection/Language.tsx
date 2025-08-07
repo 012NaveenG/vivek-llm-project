@@ -1,4 +1,7 @@
+import { APIs } from "@/utils/BotApis";
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 
 const germanToEnglish: Record<string, string> = {
     "hallo": "hello",
@@ -94,12 +97,19 @@ export const Language: React.FC = () => {
         }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (input.trim() === "") return;
-        addMessage(input, true);
-        const reply = translateText(input);
-        setTimeout(() => addMessage(reply, false), 500);
-        setInput("");
+        try {
+            await axios.post(APIs.LANGUAGE, {
+                prompt: input
+            })
+            addMessage(input, true);
+            const reply = translateText(input);
+            setTimeout(() => addMessage(reply, false), 500);
+            setInput("");
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     useEffect(() => {
@@ -126,8 +136,8 @@ export const Language: React.FC = () => {
                         <div
                             key={idx}
                             className={`${msg.isUser
-                                    ? "user-message bg-purple-200 text-neutral-700 rounded-[18px_18px_0_18px] ml-auto"
-                                    : "bot-message bg-gray-700 text-white rounded-[18px_18px_18px_0]"
+                                ? "user-message bg-purple-200 text-neutral-700 rounded-[18px_18px_0_18px] ml-auto"
+                                : "bot-message bg-gray-700 text-white rounded-[18px_18px_18px_0]"
                                 } p-3 mb-4 max-w-[80%]`}
                             dangerouslySetInnerHTML={{ __html: msg.text }}
                         ></div>

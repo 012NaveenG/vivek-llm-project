@@ -1,5 +1,8 @@
 
+import { APIs } from '@/utils/BotApis';
+import axios from 'axios';
 import { useState, useEffect, type KeyboardEvent } from 'react';
+import { toast } from 'sonner';
 
 const hrResponses: Record<string, string> = {
     leave:
@@ -33,14 +36,22 @@ const InstructionOverride = () => {
         scrollToBottom();
     }, [messages, typing]);
 
-    const handleSendMessage = (message: string) => {
-        setMessages((prev) => [...prev, { text: message, user: true }]);
-        setTyping(true);
-        setTimeout(() => {
-            setTyping(false);
-            const botResponse = getBotResponse(message);
-            setMessages((prev) => [...prev, { text: botResponse, user: false }]);
-        }, 1500);
+    const handleSendMessage = async (message: string) => {
+        try {
+           
+            await axios.post(APIs.INSTRUCTION_OVERRIDE, {
+                prompt: message
+            })
+            setMessages((prev) => [...prev, { text: message, user: true }]);
+            setTyping(true);
+            setTimeout(() => {
+                setTyping(false);
+                const botResponse = getBotResponse(message);
+                setMessages((prev) => [...prev, { text: botResponse, user: false }]);
+            }, 1500);
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     const getBotResponse = (msg: string): string => {
