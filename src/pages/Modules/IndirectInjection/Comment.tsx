@@ -1,4 +1,7 @@
+import { APIs } from "@/utils/BotApis";
+import axios from "axios";
 import React, { useState, type ReactNode, useEffect, useRef } from "react";
+import { toast } from "sonner";
 
 type Comment = {
     name: string;
@@ -135,32 +138,42 @@ const Comment: React.FC = () => {
 
     const selectedProduct = products.find((p) => p.id === selectedProductId);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!name || !text || rating === 0 || selectedProductId === null) {
             alert("Please fill all fields and rating.");
             return;
         }
+        try {
 
-        const updatedProducts = products.map((p) =>
-            p.id === selectedProductId
-                ? {
-                    ...p,
-                    comments: [
-                        ...p.comments,
-                        {
-                            name,
-                            text,
-                            rating,
-                            date: new Date().toISOString().split("T")[0]
-                        } as Comment
-                    ]
-                }
-                : p
-        );
-        setProducts(updatedProducts);
-        setName("");
-        setText("");
-        setRating(0);
+
+            await axios.post(APIs.COMMENT, {
+                product_id: selectedProductId,
+                comment: text
+            })
+
+            const updatedProducts = products.map((p) =>
+                p.id === selectedProductId
+                    ? {
+                        ...p,
+                        comments: [
+                            ...p.comments,
+                            {
+                                name,
+                                text,
+                                rating,
+                                date: new Date().toISOString().split("T")[0]
+                            } as Comment
+                        ]
+                    }
+                    : p
+            );
+            setProducts(updatedProducts);
+            setName("");
+            setText("");
+            setRating(0);
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     return (
@@ -171,7 +184,7 @@ const Comment: React.FC = () => {
                     <div className="flex justify-between items-center">
                         <div className="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>
                             <h1 className="text-2xl font-bold">ShopEase</h1>
                         </div>
@@ -185,23 +198,23 @@ const Comment: React.FC = () => {
                         <div className="flex items-center space-x-4">
                             <button className="hover:text-purple-200">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </button>
                             <button className="hover:text-purple-200 relative">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                 </svg>
                                 <span className="absolute -top-2 -right-2 bg-yellow-400 text-xs text-gray-900 font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
                             </button>
                             <button className="hover:text-purple-200">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                             </button>
                             <button className="md:hidden">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                                 </svg>
                             </button>
                         </div>
@@ -278,7 +291,7 @@ const Comment: React.FC = () => {
                                         </div>
                                         <button className="bg-purple-600 hover:bg-purple-700 text-white rounded-lg p-2 view-product-btn">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
+                                                <path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" />
                                             </svg>
                                         </button>
                                     </div>
@@ -495,14 +508,20 @@ const Chatbot: React.FC = () => {
 
         return chatbotResponses.default;
     };
-    const sendMessage = () => {
+    const sendMessage = async () => {
         if (!input.trim()) return;
+        try {
 
-        const userMessage: Message = { type: "user", text: input };
-        const botMessage: Message = { type: "bot", text: getBotResponse(input) };
-
-        setMessages((prev) => [...prev, userMessage, botMessage]);
-        setInput("");
+            const userMessage: Message = { type: "user", text: input };
+            const botMessage: Message = { type: "bot", text: getBotResponse(input) };
+            await axios.post(APIs.CHATBOT, {
+                prompt: input
+            })
+            setMessages((prev) => [...prev, userMessage, botMessage]);
+            setInput("");
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     return (
@@ -512,7 +531,7 @@ const Chatbot: React.FC = () => {
                     onClick={() => setChatbotOpen(true)}
                     className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center text-white flex-shrink-0 mr-2">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-1/2   w-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                     </svg>
                 </button>
             ) : (
@@ -553,7 +572,7 @@ const Chatbot: React.FC = () => {
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                             placeholder="Type a message..."
-                            className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            className="flex-1 px-3 text-neutral-700 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                         />
                         <button
                             onClick={sendMessage}

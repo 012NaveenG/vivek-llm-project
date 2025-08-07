@@ -1,6 +1,9 @@
 
 
+import { APIs } from "@/utils/BotApis";
+import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import { toast } from "sonner";
 
 type Message = {
     text: string;
@@ -241,27 +244,34 @@ const BankChat: React.FC = () => {
         scrollToBottom();
     }, [messages]);
 
-    const sendMessage = () => {
+    const sendMessage = async () => {
         if (!input.trim()) return;
+        try {
 
-        const userMessage: Message = {
-            text: input,
-            sender: "user",
-            timestamp: getCurrentTime(),
-        };
-
-        setMessages((prev) => [...prev, userMessage]);
-        const botReplyText = getBotResponse(input);
-        setInput("");
-
-        setTimeout(() => {
-            const botReply: Message = {
-                text: botReplyText,
-                sender: "bot",
+            const userMessage: Message = {
+                text: input,
+                sender: "user",
                 timestamp: getCurrentTime(),
             };
-            setMessages((prev) => [...prev, botReply]);
-        }, 1000);
+
+            await axios.post(APIs.PERSONA, {
+                prompt: input.trim()
+            })
+            setMessages((prev) => [...prev, userMessage]);
+            const botReplyText = getBotResponse(input);
+            setInput("");
+
+            setTimeout(() => {
+                const botReply: Message = {
+                    text: botReplyText,
+                    sender: "bot",
+                    timestamp: getCurrentTime(),
+                };
+                setMessages((prev) => [...prev, botReply]);
+            }, 1000);
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
 

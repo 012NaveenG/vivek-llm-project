@@ -519,7 +519,10 @@ export default CodeInjection
 
 
 
+import { APIs } from '@/utils/BotApis';
+import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
+import { toast } from 'sonner';
 
 type Message = {
     text: string;
@@ -561,19 +564,26 @@ const ChatBot: React.FC = () => {
     const [isTyping, setIsTyping] = useState(false);
     const chatRef = useRef<HTMLDivElement | null>(null);
 
-    const sendMessage = () => {
+    const sendMessage = async () => {
         if (input.trim() === '') return;
+        try {
 
-        const userMessage: Message = { text: input, sender: 'user' };
-        setMessages(prev => [...prev, userMessage]);
-        setInput('');
-        setIsTyping(true);
+            const userMessage: Message = { text: input, sender: 'user' };
+            await axios.post(APIs.CODE_INJECTION, {
+                prompt: input.trim()
+            })
+            setMessages(prev => [...prev, userMessage]);
+            setInput('');
+            setIsTyping(true);
 
-        setTimeout(() => {
-            const botResponse = getBotResponse(userMessage.text);
-            setMessages(prev => [...prev, { text: botResponse, sender: 'bot' }]);
-            setIsTyping(false);
-        }, 1000);
+            setTimeout(() => {
+                const botResponse = getBotResponse(userMessage.text);
+                setMessages(prev => [...prev, { text: botResponse, sender: 'bot' }]);
+                setIsTyping(false);
+            }, 1000);
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     useEffect(() => {

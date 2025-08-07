@@ -1,4 +1,7 @@
+import { APIs } from "@/utils/BotApis";
+import axios from "axios";
 import React, { useRef, useState } from "react";
+import { toast } from "sonner";
 
 type UploadedFile = {
   name: string;
@@ -32,22 +35,27 @@ const Encoded: React.FC = () => {
     }
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!chatInput.trim()) return;
+    try {
+      await axios.post(APIs.ENCODE, "")
 
-    setChatMessages((prev) => [...prev, { sender: "user", message: chatInput }]);
-    setChatInput("");
+      setChatMessages((prev) => [...prev, { sender: "user", message: chatInput }]);
+      setChatInput("");
 
-    // Simulate bot response for now
-    setTimeout(() => {
-      setChatMessages((prev) => [
-        ...prev,
-        {
-          sender: "bot",
-          message: "Thanks for your question! I'll analyze your resume and get back to you shortly.",
-        },
-      ]);
-    }, 600);
+      // Simulate bot response for now
+      setTimeout(() => {
+        setChatMessages((prev) => [
+          ...prev,
+          {
+            sender: "bot",
+            message: "Thanks for your question! I'll analyze your resume and get back to you shortly.",
+          },
+        ]);
+      }, 600);
+    } catch (error: any) {
+      toast.error(error.message)
+    }
   };
 
   const handleSampleClick = (question: string) => {
@@ -136,11 +144,10 @@ const Encoded: React.FC = () => {
                   </div>
                 )}
                 <div
-                  className={`${
-                    msg.sender === "bot"
-                      ? "bg-purple-600 text-white rounded-lg p-3 max-w-xs"
-                      : "bg-blue-100 text-gray-800 rounded-lg p-3 max-w-xs"
-                  }`}
+                  className={`${msg.sender === "bot"
+                    ? "bg-purple-600 text-white rounded-lg p-3 max-w-xs"
+                    : "bg-blue-100 text-gray-800 rounded-lg p-3 max-w-xs"
+                    }`}
                 >
                   <p className="text-sm">{msg.message}</p>
                 </div>
