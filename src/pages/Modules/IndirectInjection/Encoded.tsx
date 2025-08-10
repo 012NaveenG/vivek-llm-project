@@ -1,4 +1,5 @@
 import { APIs } from "@/utils/BotApis";
+import { extractNameAndSummary, readFileContent } from "@/utils/readUploadedFile.ts";
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { toast } from "sonner";
@@ -10,6 +11,11 @@ type UploadedFile = {
 
 const Encoded: React.FC = () => {
   const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null);
+  const [fileData, setFileData] = useState<{ name: string | null; summary: string | null }>({
+    name: null,
+    summary: null
+  });
+
   const [chatInput, setChatInput] = useState<string>("");
   const [chatMessages, setChatMessages] = useState<{ sender: "user" | "bot"; message: string }[]>([
     {
@@ -21,10 +27,23 @@ const Encoded: React.FC = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setUploadedFile({ name: file.name, size: file.size });
+    if (!file) return;
+
+    setUploadedFile({ name: file.name, size: file.size });
+
+    try {
+      const text = await readFileContent(file);
+      const { name, summary } = extractNameAndSummary(text);
+      setFileData({
+        name,
+        summary
+      })
+      const response = await axios.post(APIs.ENCODE, { data: fileData })
+      console.log(response)
+    } catch (error) {
+      console.error("Error reading file:", error);
     }
   };
 
@@ -38,8 +57,8 @@ const Encoded: React.FC = () => {
   const handleSend = async () => {
     if (!chatInput.trim()) return;
     try {
-      const response = await axios.post(APIs.ENCODE, "")
-      console.log(response)
+      // const response = await axios.post(APIs.ENCODE, "")
+      // console.log(response)
 
       setChatMessages((prev) => [...prev, { sender: "user", message: chatInput }]);
       setChatInput("");
