@@ -5,6 +5,7 @@ import { SidebarTrigger } from "./ui/sidebar"
 import { AuthApis } from "@/utils/AuthApis.ts"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
+import { removeFromLocalstorage } from "@/utils/LocalStorageData.ts"
 
 const Navbar = () => {
 
@@ -14,6 +15,7 @@ const Navbar = () => {
       const response = await axios.post(AuthApis.logout)
       if (response.status === 200) {
         toast.success("Logout Successfully")
+        removeFromLocalstorage("user")
         navigate("sign-in")
       }
     } catch (error: any) {
