@@ -15,7 +15,14 @@ const APIs = {
     PERSONA: "http://127.0.0.1:8008/ask",
 
     // Insecure Output Handling
-    CODE_INJECTION: "http://127.0.0.1:8000/ask"
+    CODE_INJECTION: "http://127.0.0.1:8000/ask",
+    SQL_INJECTION: "http://localhost:8000/ask",
+
+    // Hallucination Module
+    MISINFORMATION: "http://localhost:8000/chat",
+
+    // SENSITIVE INFO DISCLOSURE MODULE
+    SYSTEM_PROMPT: "http://localhost:8000/ask"
 }
 
 

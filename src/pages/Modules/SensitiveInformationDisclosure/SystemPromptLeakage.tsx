@@ -1,4 +1,7 @@
+import { APIs } from '@/utils/BotApis';
+import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
+import { toast } from 'sonner';
 
 type Message = {
   text: string;
@@ -42,21 +45,26 @@ const SystemPromptLeakage: React.FC = () => {
     });
   }, [messages]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
+    try {
 
-    const userMessage: Message = { text: input, sender: 'user' };
-    setMessages((prev) => [...prev, userMessage, { text: '', sender: 'typing' }]);
-    setInput('');
+      const userMessage: Message = { text: input, sender: 'user' };
+      await axios.post(APIs.SYSTEM_PROMPT, { message: input.trim() })
+      setMessages((prev) => [...prev, userMessage, { text: '', sender: 'typing' }]);
+      setInput('');
 
-    setTimeout(() => {
-      const botText = getBotResponse(input);
-      setMessages((prev) => [
-        ...prev.filter((msg) => msg.sender !== 'typing'),
-        { text: botText, sender: 'bot' },
-      ]);
-    }, 1000 + Math.random() * 1000);
+      setTimeout(() => {
+        const botText = getBotResponse(input);
+        setMessages((prev) => [
+          ...prev.filter((msg) => msg.sender !== 'typing'),
+          { text: botText, sender: 'bot' },
+        ]);
+      }, 1000 + Math.random() * 1000);
+    } catch (error: any) {
+      toast.error(error.message)
+    }
   };
 
   const getBotResponse = (message: string): string => {
@@ -93,11 +101,10 @@ const SystemPromptLeakage: React.FC = () => {
                 </div>
               ) : (
                 <div
-                  className={`p-3 max-w-[80%] inline-block ${
-                    msg.sender === 'user'
-                      ? 'bg-indigo-600 text-white rounded-[18px_18px_4px_18px]'
-                      : 'bg-[#e9ecef] rounded-[18px_18px_18px_4px]'
-                  }`}
+                  className={`p-3 max-w-[80%] inline-block ${msg.sender === 'user'
+                    ? 'bg-indigo-600 text-white rounded-[18px_18px_4px_18px]'
+                    : 'bg-[#e9ecef] rounded-[18px_18px_18px_4px]'
+                    }`}
                 >
                   <p>{msg.text}</p>
                 </div>

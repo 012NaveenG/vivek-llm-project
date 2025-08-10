@@ -1,3 +1,7 @@
+import axios from 'axios';
+import React, { useState, useRef, useEffect } from 'react';
+import { toast } from 'sonner';
+import { APIs } from '@/utils/BotApis';
 
 const SQLInjection = () => {
   return (
@@ -317,7 +321,6 @@ export const getBotResponse = (message: string): string => {
 
 
 // Chatbot.tsx
-import React, { useState, useRef, useEffect } from 'react';
 
 const Chatbot: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -336,21 +339,27 @@ const Chatbot: React.FC = () => {
 
   useEffect(scrollToBottom, [messages]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
+    try {
 
-    const userMessage: Message = { sender: 'user', text: input };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
+      const userMessage: Message = { sender: 'user', text: input };
+      const response = await axios.post(APIs.SQL_INJECTION, { prompt: input.trim() })
+      console.log(response)
+      setMessages((prev) => [...prev, userMessage]);
+      setInput('');
 
-    setTimeout(() => {
-      const botMessage: Message = {
-        sender: 'bot',
-        text: getBotResponse(input),
-      };
-      setMessages((prev) => [...prev, botMessage]);
-    }, 1000);
+      setTimeout(() => {
+        const botMessage: Message = {
+          sender: 'bot',
+          text: getBotResponse(input),
+        };
+        setMessages((prev) => [...prev, botMessage]);
+      }, 1000);
+    } catch (error: any) {
+      toast.error(error.message)
+    }
   };
 
   return (

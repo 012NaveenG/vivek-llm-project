@@ -348,7 +348,10 @@ export default Misinformation
 
 
 
+import { APIs } from '@/utils/BotApis';
+import axios from 'axios';
 import React, { useState, useRef, useEffect, type FormEvent } from 'react';
+import { toast } from 'sonner';
 
 type Sender = 'user' | 'bot';
 
@@ -365,19 +368,25 @@ const Chatbot: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         const trimmedMessage = input.trim();
         if (trimmedMessage === '') return;
+        try {
 
-        const newMessages: Message[] = [...messages, { sender: 'user', content: trimmedMessage }];
-        setMessages(newMessages);
-        setInput('');
+            const newMessages: Message[] = [...messages, { sender: 'user', content: trimmedMessage }];
+            const response = await axios.post(APIs.MISINFORMATION, { message: trimmedMessage })
+            console.log(response)
+            setMessages(newMessages);
+            setInput('');
 
-        setTimeout(() => {
-            const botReply = getBotResponse(trimmedMessage);
-            setMessages(prev => [...prev, { sender: 'bot', content: botReply }]);
-        }, 600);
+            setTimeout(() => {
+                const botReply = getBotResponse(trimmedMessage);
+                setMessages(prev => [...prev, { sender: 'bot', content: botReply }]);
+            }, 600);
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     useEffect(() => {
