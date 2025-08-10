@@ -38,7 +38,8 @@ const Encoded: React.FC = () => {
   const handleSend = async () => {
     if (!chatInput.trim()) return;
     try {
-      await axios.post(APIs.ENCODE, "")
+      const response = await axios.post(APIs.ENCODE, "")
+      console.log(response)
 
       setChatMessages((prev) => [...prev, { sender: "user", message: chatInput }]);
       setChatInput("");

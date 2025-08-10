@@ -14,15 +14,18 @@ import {
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { toast } from "sonner"
 import BtnLoader from "@/components/BtnLoader.tsx"
+import axios from "axios"
+import { AuthApis } from "@/utils/AuthApis.ts"
 
 
 const Signup = () => {
 
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
     const formSchema = z.object({
         username: z.string().min(2, {
             message: "Username must be at least 2 characters.",
@@ -45,14 +48,15 @@ const Signup = () => {
         },
     })
 
+
     const handleSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             setLoading(true)
-            // const response = await axios.post(``, values)
-            // if (response.status == 200) {
-            //     toast.success(`LoggedIn successfully`)
-            // }
-            console.log(values)
+            const response = await axios.post(AuthApis.signUp, values)
+            if (response.status == 200) {
+                toast.success(`LoggedIn successfully`)
+                navigate('/sign-in')
+            }
         } catch (error) {
             toast.error(`Login Failed`)
         } finally {

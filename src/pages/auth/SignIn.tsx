@@ -14,14 +14,17 @@ import {
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { toast } from "sonner"
 import BtnLoader from "@/components/BtnLoader.tsx"
+import axios from "axios"
+import { AuthApis } from "@/utils/AuthApis"
 
 const Auth = () => {
 
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
     const formSchema = z.object({
         username: z.string().min(2, {
             message: "Username must be at least 2 characters.",
@@ -43,11 +46,11 @@ const Auth = () => {
     const handleSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             setLoading(true)
-            // const response = await axios.post(``, values)
-            // if (response.status == 200) {
-            //     toast.success(`LoggedIn successfully`)
-            // }
-            console.log(values)
+            const response = await axios.post(AuthApis.signIn, values)
+            if (response.status == 200) {
+                toast.success(`LoggedIn successfully`)
+                navigate("sign-up")
+            }
         } catch (error) {
             toast.error(`Login Failed`)
         } finally {
@@ -58,7 +61,7 @@ const Auth = () => {
 
     return (
         <div className=" flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
-      
+
             <div className="w-full max-w-sm md:max-w-3xl">
                 <div className="flex flex-col gap-6">
                     <Card className="overflow-hidden p-0">
