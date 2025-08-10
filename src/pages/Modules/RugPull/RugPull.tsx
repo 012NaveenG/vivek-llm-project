@@ -27,7 +27,7 @@ const RugPull = () => {
                 </div>
             </header>
 
-            <ChatBot/>
+            <ChatBot />
         </div>
     )
 }
@@ -35,7 +35,10 @@ const RugPull = () => {
 export default RugPull
 
 
+import { APIs } from '@/utils/BotApis';
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
 
 type ResponseType = {
     text: string;
@@ -111,21 +114,27 @@ const ChatBot: React.FC = () => {
         }
     }, [messages]);
 
-    const handleSend = () => {
+    const handleSend = async () => {
         if (!input.trim() || timeLeft <= 0) return;
-        const msg = input.trim();
-        setMessages((prev) => [...prev, { text: msg, isUser: true }]);
-        setInput('');
+        try {
+            const msg = input.trim();
+            const response = await axios.post(APIs.RUG_PULL, { prompt: input.trim() })
+            console.log(response)
+            setMessages((prev) => [...prev, { text: msg, isUser: true }]);
+            setInput('');
 
-        setTimeout(() => {
-            const key = Object.keys(responses).find((k) => msg.toLowerCase().includes(k));
-            const response =
-                responses[key || ''] || {
-                    text: `Message received and processed. Your query "${msg}" has been logged for analysis.\n\nType 'help' for available commands.`,
-                    classification: 'CONFIDENTIAL',
-                };
-            setMessages((prev) => [...prev, { text: response.text, isUser: false, classification: response.classification }]);
-        }, 1300);
+            setTimeout(() => {
+                const key = Object.keys(responses).find((k) => msg.toLowerCase().includes(k));
+                const response =
+                    responses[key || ''] || {
+                        text: `Message received and processed. Your query "${msg}" has been logged for analysis.\n\nType 'help' for available commands.`,
+                        classification: 'CONFIDENTIAL',
+                    };
+                setMessages((prev) => [...prev, { text: response.text, isUser: false, classification: response.classification }]);
+            }, 1300);
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     return (

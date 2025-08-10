@@ -27,7 +27,10 @@ const UnboundConsumption = () => {
 export default UnboundConsumption
 
 
+import { APIs } from '@/utils/BotApis';
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
 
 type BotResponse = {
     response: string;
@@ -91,19 +94,25 @@ const SummerAssistantBot: React.FC = () => {
         chatRef.current?.scrollTo({ top: chatRef.current.scrollHeight, behavior: 'smooth' });
     }, [messages]);
 
-    const handleSend = () => {
+    const handleSend = async () => {
         if (!input.trim()) return;
+        try {
 
-        const userMessage = { text: input.trim(), isUser: true };
-        setMessages((prev) => [...prev, userMessage]);
-        setInput('');
+            const userMessage = { text: input.trim(), isUser: true };
+            const response = await axios.post(APIs.UNBOUNDED_CONSUMPTION, { user_input: input.trim() })
+            console.log(response)
+            setMessages((prev) => [...prev, userMessage]);
+            setInput('');
 
-        setTimeout(() => {
-            const lowerInput = userMessage.text.toLowerCase();
-            const matched = Object.entries(summerResponses).find(([key]) => lowerInput.includes(key));
-            const bot = matched ? matched[1] : generalResponses[Math.floor(Math.random() * generalResponses.length)];
-            setMessages((prev) => [...prev, { text: bot.response, isUser: false, emoji: bot.emoji }]);
-        }, 1500);
+            setTimeout(() => {
+                const lowerInput = userMessage.text.toLowerCase();
+                const matched = Object.entries(summerResponses).find(([key]) => lowerInput.includes(key));
+                const bot = matched ? matched[1] : generalResponses[Math.floor(Math.random() * generalResponses.length)];
+                setMessages((prev) => [...prev, { text: bot.response, isUser: false, emoji: bot.emoji }]);
+            }, 1500);
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     const handleQuickMessage = (msg: string) => {

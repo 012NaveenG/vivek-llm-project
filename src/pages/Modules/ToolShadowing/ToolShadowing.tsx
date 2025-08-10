@@ -528,7 +528,10 @@ const ToolShadowing = () => {
 export default ToolShadowing
 
 
+import { APIs } from '@/utils/BotApis';
+import axios from 'axios';
 import { useState, useRef, useEffect, type FormEvent } from 'react';
+import { toast } from 'sonner';
 
 interface Message {
   content: string;
@@ -556,17 +559,24 @@ const ChatBot = () => {
     setMessages(prev => [...prev, { content, isUser }]);
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-    addMessage(input, true);
-    setInput('');
-    setIsTyping(true);
-    setTimeout(() => {
-      setIsTyping(false);
-      const botReply = botResponses[Math.floor(Math.random() * botResponses.length)];
-      addMessage(botReply, false);
-    }, 1500);
+    try {
+
+      addMessage(input, true);
+      const response = await axios.post(APIs.TOOL_SHADOWING, { message: input.trim() })
+      console.log(response)
+      setInput('');
+      setIsTyping(true);
+      setTimeout(() => {
+        setIsTyping(false);
+        const botReply = botResponses[Math.floor(Math.random() * botResponses.length)];
+        addMessage(botReply, false);
+      }, 1500);
+    } catch (error: any) {
+      toast.error(error.message)
+    }
   };
 
   useEffect(() => {

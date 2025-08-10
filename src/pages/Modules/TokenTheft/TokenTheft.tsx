@@ -257,7 +257,10 @@ export default TokenTheft
 
 
 
+import { APIs } from '@/utils/BotApis';
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
 
 interface Message {
     sender: 'user' | 'bot';
@@ -300,13 +303,19 @@ const ChatBot: React.FC = () => {
         }, 300);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const message = input.trim();
         if (!message) return;
-        addUserMessage(message);
-        setInput('');
-        processUserMessage(message);
+        try {
+            addUserMessage(message);
+            const response = await axios.post(APIs.TOKEN_THEFT, { prompt: input.trim() })
+            console.log(response)
+            setInput('');
+            processUserMessage(message);
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     const processUserMessage = (message: string) => {

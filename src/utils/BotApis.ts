@@ -21,8 +21,20 @@ const APIs = {
     // Hallucination Module
     MISINFORMATION: "http://localhost:8000/chat",
 
-    // SENSITIVE INFO DISCLOSURE MODULE
-    SYSTEM_PROMPT: "http://localhost:8000/ask"
+    // Sensitive Info Disclosure Module
+    SYSTEM_PROMPT: "http://localhost:8000/ask",
+
+    // Rug Pull Module
+    RUG_PULL: "http://127.0.0.1:8000/ask",
+
+    // Unbounded Consumption Module
+    UNBOUNDED_CONSUMPTION: "http://127.0.0.1:8017/chat",
+
+    // Tool Shadowing Module
+    TOOL_SHADOWING: "http://localhost:8018/ask",
+
+    // Token Theft Module
+    TOKEN_THEFT: "http://127.0.0.1:8000/chat"
 }
 
 
